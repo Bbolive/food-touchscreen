@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f0f0f0;
+        }
+        h1 { margin-top: 40px; }
+        button {
+            font-size: 28px;
+            padding: 20px 40px;
+            margin: 20px;
+            cursor: pointer;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 20px;
+            box-shadow: 0 0 10px #ccc;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🍽️ ระบบตรวจจับอาหารอัตโนมัติ</h1>
+
+    <button onclick="detect()">เริ่มตรวจจับอาหาร</button>
+
+    <div class="card" id="result">
+        กรุณาวางถาดอาหาร
+    </div>
+
+    <script>
+        function detect() {
+            fetch("http://localhost:5000/detect")
+                .then(res => res.json())
+                .then(data => {
+                    if(data.message){
+                        document.getElementById("result").innerHTML = data.message;
+                        return;
+                    }
+                    let html = "";
+                    data.forEach(item => {
+                        html += `
+                            <p><b>อาหาร:</b> ${item.food}</p>
+                            <p><b>ความมั่นใจ:</b> ${item.confidence}</p>
+                        `;
+                    });
+                    html += `<button>ยืนยัน</button> <button>ยกเลิก</button>`;
+                    document.getElementById("result").innerHTML = html;
+                })
+                .catch(err => {
+                    document.getElementById("result").innerHTML = "เกิดข้อผิดพลาด";
+                    console.error(err);
+                });
+        }
+    </script>
+
+</body>
+</html>
