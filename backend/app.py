@@ -5,7 +5,7 @@ from detect import detect_food
 app = Flask(__name__)
 CORS(app)
 
-TEST_IMAGE = "../frontend/images/test02.jpg"
+TEST_IMAGE = "../frontend/images/test.jpg"
 
 @app.route("/detect", methods=["GET"])
 def detect():

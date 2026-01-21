@@ -7,14 +7,64 @@
 </head>
 <body>
 
-    <h1>🍽️ ระบบตรวจจับอาหารอัตโนมัติ</h1>
+<header>
+    🤖 ระบบตรวจจับอาหารอัตโนมัติด้วยปัญญาประดิษฐ์
+</header>
 
-    <button onclick="detect()">เริ่มตรวจจับอาหาร</button>
-
-    <div class="card" id="result">
-        กรุณาวางถาดอาหาร
+<!-- PAGE 1 -->
+<section id="page-start" class="page active">
+    <div class="status">
+        <span class="dot"></span> กล้องกำลังทำงาน
     </div>
 
-    <script src="script.js"></script>
+    <div class="image-box">
+        <img src="images/preview.jpg">
+    </div>
+
+    <button class="primary" onclick="startDetect()">
+        📷 ถ่ายรูป
+    </button>
+</section>
+
+<!-- PAGE 2 -->
+<section id="page-result" class="page">
+    <div class="result-layout">
+        <div class="left">
+            <img id="foodImage" src="images/test02.jpg">
+        </div>
+
+        <div class="right">
+            <h3>รายการอาหารทั้งหมด</h3>
+
+            <table>
+                <tr>
+                    <th>เมนู</th>
+                    <th>น้ำหนัก</th>
+                    <th>ราคา</th>
+                </tr>
+                <tr>
+                    <td id="menuName">-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h3>ราคารวม: - บาท</h3>
+
+            <button class="primary" onclick="confirmFood()">ยืนยัน</button>
+            <button class="secondary" onclick="resetApp()">ถ่ายรูปใหม่</button>
+        </div>
+    </div>
+</section>
+
+<!-- PAGE 3 -->
+<section id="page-done" class="page">
+    <h1>เสร็จสิ้นการทำงาน</h1>
+    <h2>ขอบคุณที่ใช้บริการ</h2>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -11,7 +11,10 @@ MENU_RULES = {
     },
     "ข้าวมันไก่ทอด": {
         "ingredients": {"fried_chicken", "chicken_rice"},
-    }
+    },
+    "ก๋วยเตี๋ยวไก่น่อง": {
+        "ingredients": {"chicken_drumstick", "noodles"},
+    },
 }
 
 def detect_food(image_path):

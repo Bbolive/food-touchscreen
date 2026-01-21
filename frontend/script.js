@@ -1,40 +1,28 @@
-function detect() {
-  fetch("http://localhost:5000/detect")
-    .then((res) => res.json())
-    .then((data) => {
-      const resultDiv = document.getElementById("result");
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
 
-      if (data.message) {
-        resultDiv.innerHTML = data.message;
-        return;
-      }
+function startDetect() {
+    fetch("http://localhost:5000/detect")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("menuName").innerText =
+                data[0]?.food || "ไม่สามารถระบุเมนูได้";
 
-      let html = "";
-      data.forEach((item) => {
-        html += `
-                    <p><b>อาหาร:</b> ${item.food}</p>
-                    <p><b>ความมั่นใจ:</b> ${(item.confidence * 100).toFixed(0)}%</p>
-                    <hr>
-                `;
-      });
-
-      html += `
-                <button onclick="confirmFood()">ยืนยัน</button>
-                <button onclick="cancelFood()">ยกเลิก</button>
-            `;
-
-      resultDiv.innerHTML = html;
-    })
-    .catch((err) => {
-      document.getElementById("result").innerHTML = "เกิดข้อผิดพลาด";
-      console.error(err);
-    });
+            showPage("page-result");
+        })
+        .catch(() => alert("ตรวจจับล้มเหลว"));
 }
 
 function confirmFood() {
-  alert("ยืนยันรายการอาหาร");
+    showPage("page-done");
+
+    setTimeout(() => {
+        resetApp();
+    }, 5000);
 }
 
-function cancelFood() {
-  document.getElementById("result").innerHTML = "กรุณาวางถาดอาหาร";
+function resetApp() {
+    showPage("page-start");
 }
