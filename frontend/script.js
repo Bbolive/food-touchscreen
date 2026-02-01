@@ -18,11 +18,24 @@ function startDetect() {
 function confirmFood() {
     showPage("page-done");
 
-    setTimeout(() => {
-        resetApp();
-    }, 5000);
+    let timeLeft = 5;
+    const cooldownText = document.getElementById("cooldownText");
+
+    cooldownText.innerText = `จะกลับสู่หน้าแรกภายใน ${timeLeft} วินาที`;
+
+    const countdown = setInterval(() => {
+        timeLeft--;
+
+        if (timeLeft > 0) {
+            cooldownText.innerText = `จะกลับสู่หน้าแรกภายใน ${timeLeft} วินาที`;
+        } else {
+            clearInterval(countdown);
+            resetApp();
+        }
+    }, 1000);
 }
 
 function resetApp() {
     showPage("page-start");
 }
+
