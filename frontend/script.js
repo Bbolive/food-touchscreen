@@ -1,5 +1,7 @@
 function showPage(id) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
     document.getElementById(id).classList.add("active");
 }
 
@@ -8,11 +10,23 @@ function startDetect() {
         .then(res => res.json())
         .then(data => {
             document.getElementById("menuName").innerText =
-                data[0]?.food || "ไม่สามารถระบุเมนูได้";
+                data.menu || "ไม่สามารถระบุเมนูได้";
+
+            document.getElementById("weightValue").innerText =
+                data.weight_gram + " g";
+
+            document.getElementById("priceValue").innerText =
+                data.price_baht + " บาท";
+
+            document.getElementById("totalPrice").innerText =
+                data.price_baht;
 
             showPage("page-result");
         })
-        .catch(() => alert("ตรวจจับล้มเหลว"));
+        .catch(err => {
+            console.error(err);
+            alert("ตรวจจับล้มเหลว");
+        });
 }
 
 function confirmFood() {
@@ -38,4 +52,3 @@ function confirmFood() {
 function resetApp() {
     showPage("page-start");
 }
-

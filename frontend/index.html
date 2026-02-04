@@ -30,11 +30,11 @@
 <section id="page-result" class="page">
     <div class="result-layout">
         <div class="left">
-            <img id="foodImage" src="images/test.jpg">
+            <img id="foodImage" src="images/test02.jpg">
         </div>
 
         <div class="right">
-            <h3>รายการอาหารทั้งหมด</h3>
+            <h3>รายการอาหาร</h3>
 
             <table>
                 <tr>
@@ -44,14 +44,14 @@
                 </tr>
                 <tr>
                     <td id="menuName">-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td id="weightValue">-</td>
+                    <td id="priceValue">-</td>
                 </tr>
             </table>
 
             <hr>
 
-            <h3>ราคารวม: - บาท</h3>
+            <h3>ราคารวม: <span id="totalPrice">-</span> บาท</h3>
 
             <button class="primary" onclick="confirmFood()">ยืนยัน</button>
             <button class="secondary" onclick="resetApp()">ถ่ายรูปใหม่</button>
